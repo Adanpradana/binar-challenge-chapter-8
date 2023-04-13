@@ -1,9 +1,11 @@
+import { useState } from "react";
 import Modal from "./components/Modal";
 import PlayerCards from "./components/PlayerCards";
 
 function App() {
+  const [playerDatas, setPlayerDatas] = useState([]);
+  const [isClose, setIsClose] = useState(false);
 
-  
   return (
     <div className="App">
       <>
@@ -43,20 +45,22 @@ function App() {
                 </button>
               </div>
               <div className="flex justify-center">
-                <label htmlFor="my-modal-6" className="btn">
+                <label
+                  htmlFor="my-modal-6"
+                  className="btn"
+                  onClick={() => setIsClose(true)}
+                >
                   create new player
                 </label>
-
-                <Modal />
+                {isClose && (
+                  <Modal
+                    setPlayerDatas={setPlayerDatas}
+                    playerDatas={playerDatas}
+                    setIsClose={setIsClose}
+                  />
+                )}
               </div>
-              <PlayerCards />
-              {/* {loading ? (
-                <div>
-                  <p>loading...</p>
-                </div>
-              ) : (
-                <Player players={player} />
-              )} */}
+              <PlayerCards playerDatas={playerDatas} />
             </div>
           </div>
         </div>
