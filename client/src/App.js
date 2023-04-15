@@ -4,24 +4,67 @@ import PlayerCards from "./components/PlayerCards";
 import CardEdit from "./components/Edit";
 
 function App() {
-  const [playerDatas, setPlayerDatas] = useState([]);
-
+  const [playerDatas, setPlayerDatas] = useState([
+    {
+      id: 1,
+      userName: "JohnDoe",
+      email: "johndoe@example.com",
+      experience: 5,
+    },
+    {
+      id: 2,
+      userName: "JaneDoe",
+      email: "janedoe@example.com",
+      experience: 8,
+    },
+    {
+      id: 3,
+      userName: "BobSmith",
+      email: "bobsmith@example.com",
+      experience: 10,
+    },
+  ]);
   const [edit, setEdit] = useState({});
   const [isClose, setIsClose] = useState(false);
+  const [search, setSearch] = useState("");
+  const [value, setValue] = useState("");
+  const [filteredDatas, setFilteredDatas] = useState([]);
 
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+  const handleValue = (e) => {
+    setValue(e.target.value);
+  };
+  const searchResult = (e) => {
+    e.preventDefault();
+    try {
+      if (!search) {
+        throw new Error("search cannot be emnpty");
+      }
+      if (!value) {
+        throw new Error("fill the value ppls");
+      }
+      const result = playerDatas.filter(
+        (data) => data[value].toLowerCase() === search.toLowerCase()
+      );
+      setPlayerDatas(result);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   const handleDelete = (playerId) => {
     const remove = playerDatas.filter((player) => player.id !== playerId);
     setPlayerDatas(remove);
   };
-
   const handleEdit = (playerId) => {
     const findId = playerDatas.find((data) => data.id === playerId);
     setEdit(findId);
   };
-
   const cancelEdit = () => {
     setEdit({});
   };
+
   return (
     <div className="App">
       <>
@@ -33,17 +76,21 @@ function App() {
                   type="text"
                   placeholder="Search…"
                   className="input input-bordered w-full max-w-[720px]"
+                  onChange={handleSearch}
                 />
-                <select className="select select-bordered">
+                <select
+                  className="select select-bordered"
+                  onChange={handleValue}
+                  value={value}
+                >
                   <option value={""} disabled>
                     Search by category
                   </option>
-                  <option value="username">username</option>
+                  <option value="userName">username</option>
                   <option value="email">email</option>
                   <option value="experience">experience</option>
-                  <option value="lvl">lvl</option>
                 </select>
-                <button className="btn btn-square">
+                <button className="btn btn-square" onClick={searchResult}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
