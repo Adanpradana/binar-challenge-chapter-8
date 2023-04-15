@@ -91,6 +91,7 @@ const Modal = ({ playerDatas, setPlayerDatas, setIsClose }) => {
               >
                 Submit
               </button>
+              
             </div>
           </div>
         </div>

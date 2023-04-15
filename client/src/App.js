@@ -68,7 +68,7 @@ function App() {
   return (
     <div className="App">
       <>
-        <div className="w-full flex justify-center bg-gradient-to-right">
+        <div className="w-full flex justify-center bg-gradient-to-right h-screen">
           <div className="p-5 flex justify-center w-full max-w-[700px] bg-white ">
             <div className="form-control gap-5 w-full ">
               <div className="input-group justify-center">
