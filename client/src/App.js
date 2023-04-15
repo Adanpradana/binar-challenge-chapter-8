@@ -1,17 +1,33 @@
-import { useState } from "react";
+import { Children, useState } from "react";
 import Modal from "./components/Modal";
 import PlayerCards from "./components/PlayerCards";
+import CardEdit from "./components/Edit";
 
 function App() {
   const [playerDatas, setPlayerDatas] = useState([]);
+
+  const [edit, setEdit] = useState({});
   const [isClose, setIsClose] = useState(false);
 
+  const handleDelete = (playerId) => {
+    const remove = playerDatas.filter((player) => player.id !== playerId);
+    setPlayerDatas(remove);
+  };
+
+  const handleEdit = (playerId) => {
+    const findId = playerDatas.find((data) => data.id === playerId);
+    setEdit(findId);
+  };
+
+  const cancelEdit = () => {
+    setEdit({});
+  };
   return (
     <div className="App">
       <>
         <div className="w-full flex justify-center bg-gradient-to-right">
-          <div className="p-5 flex justify-center w-full max-w-[720px] bg-white ">
-            <div className="form-control gap-20 w-full ">
+          <div className="p-5 flex justify-center w-full max-w-[700px] bg-white ">
+            <div className="form-control gap-5 w-full ">
               <div className="input-group justify-center">
                 <input
                   type="text"
@@ -60,7 +76,33 @@ function App() {
                   />
                 )}
               </div>
-              <PlayerCards playerDatas={playerDatas} />
+              <div className="flex flex-wrap gap-2 justify-center">
+                {Children.toArray(
+                  playerDatas.map((playerData) =>
+                    edit.id === playerData.id ? (
+                      <CardEdit
+                        cancelEdit={cancelEdit}
+                        username={playerData.userName}
+                        email={playerData.email}
+                        experience={playerData.experience}
+                        playerDatas={playerDatas}
+                        edit={edit}
+                        setEdit={setEdit}
+                        setPlayerDatas={setPlayerDatas}
+                      />
+                    ) : (
+                      <PlayerCards
+                        username={playerData.userName}
+                        email={playerData.email}
+                        experience={playerData.experience}
+                        handleDelete={() => handleDelete(playerData.id)}
+                        handleEdit={() => handleEdit(playerData.id)}
+                        // handleEditHandler={showEditHandler(playerData.id)}
+                      />
+                    )
+                  )
+                )}
+              </div>
             </div>
           </div>
         </div>
