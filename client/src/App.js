@@ -2,6 +2,8 @@ import { Children, useState } from "react";
 import Modal from "./components/Modal";
 import PlayerCards from "./components/PlayerCards";
 import CardEdit from "./components/Edit";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [playerDatas, setPlayerDatas] = useState([
@@ -40,17 +42,44 @@ function App() {
     e.preventDefault();
     try {
       if (!search) {
-        throw new Error("search cannot be emnpty");
+        return toast.error("search cannot be empty!", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       }
       if (!value) {
-        throw new Error("fill the value ppls");
+        return toast.error("search cannot be empty!", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       }
       const result = playerDatas.filter(
         (data) => data[value].toLowerCase() === search.toLowerCase()
       );
       setPlayerDatas(result);
     } catch (error) {
-      console.log(error.message);
+      return toast.error("unexpected error", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
   const handleDelete = (playerId) => {

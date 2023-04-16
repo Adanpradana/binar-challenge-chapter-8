@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Modal = ({ playerDatas, setPlayerDatas, setIsClose }) => {
   const [userName, setUserName] = useState("");
@@ -17,6 +19,18 @@ const Modal = ({ playerDatas, setPlayerDatas, setIsClose }) => {
   };
   const handleSubmitPlayerData = (event) => {
     event.preventDefault();
+    if (!userName || !email || !experience) {
+      return toast.error("All fields are required", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
     const datas = [
       ...playerDatas,
       {
@@ -31,6 +45,7 @@ const Modal = ({ playerDatas, setPlayerDatas, setIsClose }) => {
   };
   return (
     <>
+      <ToastContainer />
       <input type="checkbox" id="my-modal-6" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle first-letter">
         <div className="modal-box ">
@@ -91,7 +106,6 @@ const Modal = ({ playerDatas, setPlayerDatas, setIsClose }) => {
               >
                 Submit
               </button>
-              
             </div>
           </div>
         </div>

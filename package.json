@@ -24,6 +24,7 @@
     "express": "^4.17.3",
     "pg": "^8.7.3",
     "react-icons": "^4.8.0",
+    "react-toastify": "^9.1.2",
     "sequelize": "^6.17.0",
     "swagger-ui-express": "^4.6.2"
   },
