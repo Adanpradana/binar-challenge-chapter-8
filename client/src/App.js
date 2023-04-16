@@ -2,7 +2,7 @@ import { Children, useState } from "react";
 import Modal from "./components/Modal";
 import PlayerCards from "./components/PlayerCards";
 import CardEdit from "./components/Edit";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -30,7 +30,6 @@ function App() {
   const [isClose, setIsClose] = useState(false);
   const [search, setSearch] = useState("");
   const [value, setValue] = useState("");
-  const [filteredDatas, setFilteredDatas] = useState([]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
