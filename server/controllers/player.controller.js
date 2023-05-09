@@ -24,7 +24,7 @@ class PlayerController {
         email,
         password: await hashPassword(password),
         experience: experience ? experience : 0,
-        lvl: experience ? Math.floor(experience / LEVEL_BAR) : 0,
+        lvl: experience ? Math.floor(experience / LEVEL_AR) : 0,
       };
       const createdPlayer = await Player.create(newPlayer);
       if (createdPlayer) {

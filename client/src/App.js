@@ -2,7 +2,7 @@ import { Children, useState } from "react";
 import Modal from "./components/Modal";
 import PlayerCards from "./components/PlayerCards";
 import CardEdit from "./components/Edit";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -53,7 +53,7 @@ function App() {
         });
       }
       if (!value) {
-        return toast.error("search cannot be empty!", {
+        return toast.error("input category first", {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -96,6 +96,7 @@ function App() {
   return (
     <div className="App">
       <>
+        <ToastContainer />
         <div className="w-full flex justify-center bg-gradient-to-right h-screen">
           <div className="p-5 flex justify-center w-full max-w-[700px] bg-white ">
             <div className="form-control gap-5 w-full ">
